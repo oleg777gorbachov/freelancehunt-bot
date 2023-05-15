@@ -1,0 +1,25 @@
+{
+  "name": "freelancehuntbot",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node dist/index.js",
+    "build": "npx tsc",
+    "dev": "concurrently \"nodemon src/index.ts\" \"tsx --watch\""
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@types/node": "^18.16.3",
+    "axios": "^1.4.0",
+    "concurrently": "^8.0.1",
+    "dotenv": "^16.0.3",
+    "mongoose": "^7.1.0",
+    "node-telegram-bot-api": "^0.61.0",
+    "nodemon": "^2.0.22"
+  },
+  "devDependencies": {
+    "@types/node-telegram-bot-api": "^0.61.6"
+  }
+}
