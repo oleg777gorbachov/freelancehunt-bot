@@ -5,6 +5,10 @@ import { unsubscribe } from "./unsubscribe";
 import { clearskills } from "./clearskills";
 import { myskills } from "./myskills";
 import { search } from "./search";
+import { sleep } from "./sleep";
+import { utc } from "./utc";
+import { sleepRemove } from "./sleepremove";
+import { profile } from "./profile";
 
 export function commands(bot: TelegramBot) {
   bot.on("message", async (msg) => {
@@ -33,6 +37,22 @@ export function commands(bot: TelegramBot) {
 
     if (text === "/search") {
       return search(chatId, bot);
+    }
+
+    if (text === "/sleep") {
+      return sleep(chatId, bot);
+    }
+
+    if (text === "/utc") {
+      return utc(chatId, bot);
+    }
+
+    if (text === "/sleepremove") {
+      return sleepRemove(chatId, bot);
+    }
+
+    if (text === "/profile") {
+      return profile(chatId, bot);
     }
   });
 }

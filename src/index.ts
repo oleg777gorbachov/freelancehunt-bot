@@ -4,7 +4,7 @@ import user from "./models/user";
 import { commands } from "./commands";
 import { events } from "./events";
 import { getProjects } from "./utils/skills";
-import { stringSplit } from "./utils";
+import { convertToCustomTimezone, stringSplit } from "./utils";
 import "./db/clearDB";
 import "./db";
 
@@ -19,8 +19,16 @@ bot.setMyCommands([
     description: "Почати взяємодію з ботом",
   },
   {
+    command: "/profile",
+    description: "Інформація про ваш аккаунт",
+  },
+  {
     command: "/subscribe",
     description: "Підписка на фриланс проєкти",
+  },
+  {
+    command: "/search",
+    description: "Пошук доступних навичок",
   },
   {
     command: "/unsubscribe",
@@ -35,8 +43,16 @@ bot.setMyCommands([
     description: "Список ваших навичок",
   },
   {
-    command: "/search",
-    description: "Пошук доступних навичок",
+    command: "/sleep",
+    description: "Вимикає повідомлення залежно від часу вашого сну",
+  },
+  {
+    command: "/sleepremove",
+    description: "Видаляє графік",
+  },
+  {
+    command: "/utc",
+    description: "Зміна UTC (по замоувчанням +3)",
   },
 ]);
 
@@ -47,6 +63,12 @@ setInterval(async () => {
   if (!projects) return;
 
   for (let key of models) {
+    const [PM, AM] = key.sleep.split("-");
+    const userTime = convertToCustomTimezone(key.utc).getHours();
+    if (+PM > userTime && +AM <= userTime) {
+      continue;
+    }
+
     if (key.skills.length >= 1) {
       const filtered = projects?.data.filter((e) => {
         let isSkilled = false;

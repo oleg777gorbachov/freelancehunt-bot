@@ -5,6 +5,8 @@ const schema = new Schema({
   chatId: String,
   skills: { type: Array, default: [] },
   notified: Array,
+  sleep: { type: String, default: "null" },
+  utc: { type: Number, default: 3 },
 });
 
 export default model("chats", schema);
