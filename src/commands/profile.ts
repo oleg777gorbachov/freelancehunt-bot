@@ -12,14 +12,17 @@ export async function profile(chatId: number, bot: TelegramBot) {
   return bot.sendMessage(
     chatId,
     stringSplit([
-      `🟢 *Профиль*`,
+      `${model.state ? "🟢" : "🔴"} *Профиль*`,
+      `Активний: *${model.state ? "так" : "ні"}*`,
       `Ваш ID: *${chatId}*`,
-      `Графік: *${model.sleep === "null" ? "немає" : `${model.sleep}`}*`,
+      `Графік: *${
+        model.sleep === "null" ? "немає" : `${model.sleep.replace(/-/g, `\-`)}`
+      }*`,
       `Навички: /myskills`,
-      //   `UTC: *UTC${model.utc > 0 ? "+" : "-"}${model.utc}*`,
+      `UTC: *UTC${model.utc > 0 ? `\+` : `\-`}${model.utc}*`,
     ]),
     {
-      parse_mode: "MarkdownV2",
+      parse_mode: "Markdown",
     }
   );
 }
