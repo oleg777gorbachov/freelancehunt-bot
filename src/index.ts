@@ -65,7 +65,7 @@ setInterval(async () => {
   for (let key of models) {
     const [PM, AM] = key.sleep.split("-");
     const userTime = convertToCustomTimezone(key.utc).getHours();
-    if (+PM <= userTime && +AM >= userTime) {
+    if (+PM <= userTime || +AM >= userTime) {
       continue;
     }
 
